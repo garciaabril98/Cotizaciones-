@@ -1,0 +1,27 @@
+name: Descarga diaria
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 22 * * 1-5"
+permissions:
+  contents: write
+concurrency:
+  group: datos
+  cancel-in-progress: false
+jobs:
+  descarga:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install yfinance==1.8.0 pandas==3.1.1
+      - run: python descargar.py diario
+      - name: Guardar datos
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || (git commit -m "Diario $(date -u +%F)" && git pull --rebase && git push)
