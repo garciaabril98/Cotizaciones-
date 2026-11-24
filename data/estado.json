@@ -3,5 +3,9 @@
   "industrias_completadas": 94,
   "industrias_totales": 94,
   "historico_completo": true,
-  "tickers_fallidos": 347
+  "tickers_fallidos": 347,
+  "diario_actualizado": "2026-11-24T23:32:49+00:00",
+  "ultima_sesion": "2026-11-24",
+  "diario_tickers_con_datos": 6474,
+  "diario_tickers_sin_datos": 104
 }
